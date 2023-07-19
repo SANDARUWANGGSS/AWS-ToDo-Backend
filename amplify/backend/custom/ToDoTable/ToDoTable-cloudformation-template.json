@@ -1,0 +1,42 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "partitionKeyName": {
+      "Type": "String",
+      "Default": "id"
+    },
+    "partitionKeyType": {
+      "Type": "String",
+      "Default": "S"
+    },
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "ToDoDynamoDbTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        },
+        "TableName": "ToDotable"
+      }
+    }
+  },
+  "Outputs": {},
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.1.1\",\"stackType\":\"custom-customCloudformation\",\"metadata\":{}}"
+}

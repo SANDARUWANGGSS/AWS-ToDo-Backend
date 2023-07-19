@@ -1,0 +1,58 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type Todo {
+  id: ID
+  name: String!
+  description: String
+  completed: Boolean!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input CreateTodoInput
+{
+  id: ID
+  name: String
+  description: String
+  completed: Boolean
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input UpdateTodoInput
+{
+  id: ID
+  name: String
+  description: String
+  completed: Boolean
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input DeleteTodoInput
+{
+  id: ID!
+  name: String!
+}
+
+input TodoSearchInput {
+  id: String
+  name: String
+}
+
+input TodoSearchInputById {
+  id: String
+}
+
+type Query {
+  findAllTodos(input: TodoSearchInput): [Todo] @function(name: "ToDoLambda-${env}")
+  getTodo(input: TodoSearchInputById): Todo @function(name: "ToDoLambda-${env}")
+}
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): Todo @function(name: "ToDoLambda-${env}")
+  updateTodo(input: UpdateTodoInput!): Todo @function(name: "ToDoLambda-${env}")
+  deleteTodo(input: DeleteTodoInput!): Todo @function(name: "ToDoLambda-${env}")
+}

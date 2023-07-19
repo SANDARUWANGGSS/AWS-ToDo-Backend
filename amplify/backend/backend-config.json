@@ -1,0 +1,52 @@
+{
+  "api": {
+    "todoaappgql": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "custom": {
+    "ToDoTable": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "customCloudformation"
+    }
+  },
+  "function": {
+    "ToDoLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_ToDoLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ToDoLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_ToDoLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ToDoLambda"
+        }
+      ]
+    }
+  }
+}
